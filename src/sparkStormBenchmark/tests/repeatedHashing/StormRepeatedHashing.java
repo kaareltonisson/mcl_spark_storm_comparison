@@ -6,7 +6,7 @@ import sparkStormBenchmark.StormCore;
 
 public class StormRepeatedHashing extends StormCore{
 
-	static int repeatCount = 1;
+	static int repeatCount = 10;
 	
 	
 	public StormRepeatedHashing(String host, int port) {
@@ -23,7 +23,7 @@ public class StormRepeatedHashing extends StormCore{
 	public TopologyBuilder createTopology(String host, int port){
 		TopologyBuilder builder = new TopologyBuilder();
 		builder.setSpout("textSpout1", new KafkaSpoutSimpleString(host, port), 1);
-		builder.setBolt("textHashBolt0", new TextBoltRepeatedHashing(), 3)
+		builder.setBolt("textHashBolt0", new TextBoltRepeatedHashing(), 2)
 			.shuffleGrouping("textSpout1");
 //		builder.setBolt("outputBolt", new OutputBolt(), 1)
 //			.shuffleGrouping("textHashBolt1");
